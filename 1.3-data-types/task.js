@@ -33,5 +33,4 @@ function getGreeting(name) {
     }  else {
         return `Привет, мир! Меня зовут ${name}`;
     }
-    // return greeting;
 }

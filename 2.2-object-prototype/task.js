@@ -32,7 +32,7 @@ function checkBirthday(birthday) {
 
     let diff = now - birthday;
 
-    let age = diff / 31536000000;
-    
+    let age = (diff - diff / 4) / 31536000000 + (diff / 4) / 31622400000;
+
     return age > 18 ? true : false;
 }
