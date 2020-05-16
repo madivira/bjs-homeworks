@@ -9,8 +9,6 @@ class Weapon {
         this.oldDurability = object.durability;// изначальная прочность оружия
     }
     
-    
-
     takeDamage (damage) { //добавляет повреждения от соперника
         
         if (damage >= this.durability || typeof this.durability === "undefined") {
@@ -278,7 +276,6 @@ class StudentLog {
             }
         }
         console.log(sum);
-
         return sum / counter;
     }
 }

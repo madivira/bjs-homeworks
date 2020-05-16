@@ -5,23 +5,18 @@ function parseCount(num) {
         const err = new Error("Невалидное значение");
         throw err;
     }
-    try {
-       Number.parseInt(num);
-    } catch(e) {
-       console.log(e); 
-    } finally {
-        return Number.parseInt(num);
-    };
+
+    return Number.parseInt(num);
 }
 
 function validateCount(num){
 
     try {
-        parseCount(num);
+        return parseCount(num);
     } catch (e) {
         return e;
     }
-    return parseCount(num);
+    
 }
 
 //exercise 2
@@ -30,7 +25,7 @@ class Triangle {
         this.one = one;
         this.two = two;
         this.three = three;
-        if ( (this.one + this.two) < this.three || (this.one + this.three) < this.two || (this.three + this.two) < this.one) {
+        if ( (one + two) < three || (one + three) < two || (three + two) < one) {
             throw new Error("Треугольник с такими сторонами не существует");
         }
     }
@@ -41,20 +36,19 @@ class Triangle {
 
     getArea() {//Метод `getArea` должен возвращать площадь треугольника
         let p = this.getPerimeter() / 2;
-        let S =  Math.sqrt( p * (p - this.one) * (p - this.two) * (p - this.three) );
-        return Number(S.toFixed(3));
+        let s =  Math.sqrt( p * (p - this.one) * (p - this.two) * (p - this.three) );
+        return Number(s.toFixed(3));
     }
 }
 
 function getTriangle (a, b, c) {
    
   try {
-    let triangle = new Triangle(a, b, c);
-    return triangle;
+    return new Triangle(a, b, c);
   } catch(e) {
     return {
-        getPerimeter: function () {return "Ошибка! Неправильный треугольник"},
-        getArea: function () { return "Ошибка! Неправильный треугольник"}
+        getPerimeter: () => "Ошибка! Неправильный треугольник",
+        getArea: () => "Ошибка! Неправильный треугольник"
     }
   }    
   
