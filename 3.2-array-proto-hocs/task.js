@@ -6,7 +6,7 @@ function sleep(milliseconds)
 
 function sum(...args) {
     // Замедление на половину секунды.
-    sleep(500); // Можно использовать другое значение замедления.
+  //  sleep(500); // Можно использовать другое значение замедления.
     return args.reduce((sum, arg) => {
       return sum += +arg;
     }, 0);
@@ -26,21 +26,18 @@ function memorize(fn, limit) {
     
     const findElement = memory.find(el => compareArrays(Array.from(arguments), el.args));// тут проверка 
 
-    if (findElement === undefined) {//если элемент не найден
-
-      const element = {};
-      element.args = rest;
-      element.result = fn(...rest);
-      if (memory.length === limit) {
-        memory.unshift();
-      }
-      memory.push(element);
-      return fn(...rest);
-
-    } else {//если элемент найден
-
+    if (findElement != undefined) {//если элемент найден
       return findElement.result;
     }
+      
+    const element = {};
+    element.args = rest;
+    element.result = fn(...rest);
+    if (memory.length === limit) {
+      memory.unshift();
+    }
+    memory.push(element);
+    return element.result;
   }
 }
 
@@ -55,16 +52,14 @@ function testCase(testFunction, timer) {
   console.time(timer);
 
   for(let i = 0; i < 100; i++) {
-
-    for(let i = 0; i < arr.lengt; i++ )
-    testFunction(...i.forEach(element => element));
-
+    arr.forEach(element => testFunction(...element));
   }
 
   console.timeEnd(timer);
 
 }
 
-testCase(sum);//default: 0.0390625ms
-testCase(memorize());//default: 0.02587890625ms
-// без задержки default: 0.055908203125ms
+testCase(sum, "timerSum");//timerSum: 250510.830078125ms
+testCase(memorize(sum,10), "timerMemorize");//timerMemorize: 1503.979736328125ms
+//timerSum: 0.285888671875ms
+//timerMemorize: 1.471923828125ms
